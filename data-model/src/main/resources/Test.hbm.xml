@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.reactor.monitoring.model.entity.Test" table="TEST">
+        <meta attribute="class-description">
+       
+        </meta>
+        <cache usage="nonstrict-read-write" region="Hazelcast" include="all"/>
+        <id name="id" type="long" column="ID">
+			<generator class="native"/>
+		</id>
+        <version name="version" column="VERSION" type="long" />
+        <property name="testId" column="TEST_ID" type="string" unique="true" not-null="true"/>
+        <property name="testName" column="TEST_NAME" type="string" not-null="true"/>
+        
+        <set name="testlocations"
+	            cascade="all, delete-orphan"
+	            inverse="true"
+	            lazy="true">
+	        <cache usage="nonstrict-read-write" region="Hazelcast" include="all"/>
+	        <key column="TEST_ID" not-null="true"/>
+	        <one-to-many class="org.reactor.monitoring.model.entity.TestLocation"/>
+	    </set>
+	    
+	    <set name="locations" table="TEST_LOCATION"
+        	inverse="true" lazy="true"  cascade="all" >
+        	<cache usage="nonstrict-read-write" region="Hazelcast" include="all"/>
+            <key>
+                <column name="TEST_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="org.reactor.monitoring.model.entity.Location">
+                <column name="LOCATION_ID" not-null="true" />
+            </many-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>

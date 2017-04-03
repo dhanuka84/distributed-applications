@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+			"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+<class name="org.reactor.monitoring.model.entity.TestLocation" table="TEST_LOCATION">
+	 <cache usage="nonstrict-read-write" region="Hazelcast" include="all"/>
+    <!-- A composite primary key, assigned by the application -->
+    <composite-id name="id" class="org.reactor.monitoring.model.entity.TestLocation$Id">
+        <key-property name="testId" access="field" column="TEST_ID" />
+        <key-property name="locationId" access="field" column="LOCATION_ID"/>
+    </composite-id> 
+
+    <!-- Regular property -->
+     <version  name="version"
+                column="VERSION"
+                type="long" 
+                />
+    
+    
+    <property   name="availabilityCritical"
+                type="float"
+                not-null="true" >
+                
+                <column name="AVAILABILITY_CRITICAL" default="'0.0'"/>
+    </property>
+
+    <property   name="availabilityWarning"
+                type="float"
+                not-null="true">
+                
+                <column name="AVAILABILITY_WARNING" default="'0.0'"/>
+    </property>
+                
+     <property   name="responseCritical"
+                type="float"
+                not-null="true">
+                
+                <column name="RESPONSE_CRITICAL" default="'0.0'"/>
+    </property>
+                
+     <property   name="responseWarning"
+                type="float"
+                not-null="true">
+                
+                <column name="RESPONSE_WARNING" default="'0.0'"/>
+    </property>
+
+    <!-- Read-only association property -->
+    <many-to-one    name="test"
+                    column="TEST_ID"
+                    insert="false"
+            		update="false" 
+                    not-null="true"
+                     fetch="select" 
+                     class="org.reactor.monitoring.model.entity.Test"
+                   />
+
+    <!-- Read-only association property -->
+    <many-to-one    name="location"
+                    column="LOCATION_ID"
+                    insert="false"
+            		update="false" 
+                    not-null="true"
+                     fetch="select" 
+                     class="org.reactor.monitoring.model.entity.Location"
+                   />
+</class>
+
+</hibernate-mapping>

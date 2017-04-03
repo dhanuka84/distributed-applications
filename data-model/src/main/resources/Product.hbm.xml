@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.reactor.monitoring.model.entity.Product" table="PRODUCT">
+        <meta attribute="class-description">
+       
+        </meta>
+        <cache usage="nonstrict-read-write" region="Hazelcast" include="all"/>
+        <id name="id" type="long" column="ID">
+			<generator class="native"/>
+		</id>
+        <version name="version" column="VERSION" type="long" />
+        <property name="productId" column="PRODUCT_ID" type="string" not-null="true" unique="true"/>
+       
+        
+        <set name="tests" table="TEST" cascade="all, delete-orphan"  lazy="true"  >
+			<cache usage="nonstrict-read-write" region="Hazelcast" include="all"/>
+            <key>
+                <column name="PRODUCT_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.reactor.monitoring.model.entity.Test" />
+        </set>
+
+    </class>
+</hibernate-mapping>

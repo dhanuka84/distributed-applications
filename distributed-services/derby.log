@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Nov 17 10:48:41 IST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0158-70b8-fdbe-00000633ece0 
+on database directory /home/uranadh/research/hazelcast/code/hazelcast-code-samples/hazelcast-integration/distributed-apps/hibernateDB with class loader sun.misc.Launcher$AppClassLoader@4e0e2f2a 
+Loaded from file:/home/uranadh/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_60-b27
+user.dir=/home/uranadh/research/hazelcast/code/hazelcast-code-samples/hazelcast-integration/distributed-apps
+os.name=Linux
+os.arch=amd64
+os.version=4.4.0-47-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
